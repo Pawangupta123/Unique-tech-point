@@ -15,6 +15,7 @@ import { productLd, breadcrumbLd } from "@/lib/seo";
 import { productHref } from "@/lib/links";
 import { formatPrice } from "@/lib/format";
 import { site } from "@/lib/site";
+import { Reveal } from "@/components/reveal";
 
 type Params = Promise<{ category: string; slug: string }>;
 
@@ -64,93 +65,120 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
           ]),
         ]}
       />
-      <Breadcrumbs
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Products", href: "/products" },
-          ...(product.category
-            ? [{ label: product.category.name, href: `/products/${product.category.slug}` }]
-            : []),
-          { label: product.title },
-        ]}
-      />
+      <Reveal direction="left">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Products", href: "/products" },
+            ...(product.category
+              ? [{ label: product.category.name, href: `/products/${product.category.slug}` }]
+              : []),
+            { label: product.title },
+          ]}
+        />
+      </Reveal>
 
       <div className="grid gap-8 lg:grid-cols-2">
-        <ProductGallery images={product.images} alt={product.title} icon={product.category?.slug} />
+        <Reveal direction="right" className="perspective">
+          <ProductGallery images={product.images} alt={product.title} icon={product.category?.slug} />
+        </Reveal>
 
-        <div>
-          {product.brand && (
-            <span className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-              {product.brand}
-            </span>
-          )}
-          <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{product.title}</h1>
-
-          <div className="mt-3 flex items-center gap-3">
-            <span className="text-2xl font-bold text-brand-700">
-              {formatPrice(product.price, product.price_label)}
-            </span>
-            {product.in_stock ? (
-              <Badge className="bg-in-stock">In stock</Badge>
-            ) : (
-              <Badge variant="secondary">Out of stock</Badge>
+        <div className="space-y-6">
+          <Reveal direction="left" delay={100}>
+            {product.brand && (
+              <span className="text-sm font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:text-brand-600">
+                {product.brand}
+              </span>
             )}
-          </div>
+          </Reveal>
 
-          {product.short_description && (
-            <p className="mt-4 text-muted-foreground">{product.short_description}</p>
-          )}
+          <Reveal direction="left" delay={150}>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              {product.title}
+            </h1>
+          </Reveal>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <WhatsAppButton size="lg" message={enquiryMsg} label="WhatsApp enquiry" />
-            <CallButton size="lg" showNumber />
-            <EnquiryDialog source="product" productId={product.id} subject={product.title} />
-          </div>
+          <Reveal direction="left" delay={200}>
+            <div className="mt-3 flex items-center gap-3">
+              <span className="text-2xl font-bold text-brand-700">{formatPrice(product.price, product.price_label)}</span>
+              {product.in_stock ? (
+                <Badge className="bg-in-stock animate-pulse-glow">In stock</Badge>
+              ) : (
+                <Badge variant="secondary">Out of stock</Badge>
+              )}
+            </div>
+          </Reveal>
 
-          <ul className="mt-6 space-y-2">
-            {TRUST.map(({ icon: Icon, text }) => (
-              <li key={text} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Icon className="size-4 text-brand-700" />
-                {text}
-              </li>
-            ))}
-          </ul>
+          <Reveal direction="left" delay={250}>
+            {product.short_description && (
+              <p className="text-muted-foreground transition-colors hover:text-foreground/70">{product.short_description}</p>
+            )}
+          </Reveal>
+
+          <Reveal direction="left" delay={300}>
+            <div className="flex flex-wrap gap-3">
+              <WhatsAppButton size="lg" message={enquiryMsg} label="WhatsApp enquiry" />
+              <CallButton size="lg" showNumber className="magnetic-btn" />
+              <EnquiryDialog source="product" productId={product.id} subject={product.title} />
+            </div>
+          </Reveal>
+
+          <Reveal direction="left" delay={400}>
+            <ul className="space-y-2">
+              {TRUST.map(({ icon: Icon, text }, i) => (
+                <li key={text} className="flex items-center gap-2 text-sm text-muted-foreground transition-all duration-300 hover:translate-x-1 hover:text-foreground">
+                  <Icon className="size-4 text-brand-700 transition-transform duration-300 hover:scale-125" />
+                  {text}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </div>
 
       {(product.description || product.specs) && (
-        <div className="mt-12 max-w-3xl">
-          <Separator className="mb-6" />
-          {product.description && (
-            <>
-              <h2 className="text-lg font-semibold">Description</h2>
-              <p className="mt-2 whitespace-pre-line text-muted-foreground">{product.description}</p>
-            </>
-          )}
-          {product.specs && Object.keys(product.specs).length > 0 && (
-            <div className="mt-6">
-              <h2 className="text-lg font-semibold">Specifications</h2>
-              <dl className="mt-3 divide-y rounded-lg border">
-                {Object.entries(product.specs).map(([k, v]) => (
-                  <div key={k} className="flex gap-4 px-4 py-2.5 text-sm">
-                    <dt className="w-40 shrink-0 font-medium text-muted-foreground">{k}</dt>
-                    <dd className="flex items-center gap-1.5">
-                      <Check className="size-3.5 text-in-stock" />
-                      {v}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          )}
-        </div>
+        <Reveal direction="up" delay={200}>
+          <div className="mt-12 max-w-3xl">
+            <Separator className="mb-6" />
+            {product.description && (
+              <>
+                <h2 className="text-lg font-semibold text-foreground">
+                  Description
+                </h2>
+                <p className="mt-2 whitespace-pre-line text-muted-foreground transition-colors hover:text-foreground/70">{product.description}</p>
+              </>
+            )}
+            {product.specs && Object.keys(product.specs).length > 0 && (
+              <div className="mt-6">
+                <h2 className="text-lg font-semibold text-foreground">
+                  Specifications
+                </h2>
+                <dl className="mt-3 divide-y rounded-lg border transition-all duration-300 hover:border-brand-300 hover:shadow-md">
+                  {Object.entries(product.specs).map(([k, v]) => (
+                    <div key={k} className="flex gap-4 px-4 py-2.5 text-sm transition-colors hover:bg-brand-50/30">
+                      <dt className="w-40 shrink-0 font-medium text-muted-foreground">{k}</dt>
+                      <dd className="flex items-center gap-1.5">
+                        <Check className="size-3.5 text-in-stock transition-transform duration-300 hover:scale-125" />
+                        {v}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+          </div>
+        </Reveal>
       )}
 
       {related.length > 0 && (
-        <div className="mt-16">
-          <SectionHeading title="You may also like" />
-          <ProductGrid products={related} />
-        </div>
+        <Reveal direction="up" delay={300}>
+          <div className="mt-16">
+            <SectionHeading title="You may also like" />
+            <div className="stagger-children">
+              <ProductGrid products={related} />
+            </div>
+          </div>
+        </Reveal>
       )}
     </section>
   );

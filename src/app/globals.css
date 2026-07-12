@@ -493,8 +493,8 @@ body {
 
 /* Stagger children animation */
 .stagger-children > * {
-  opacity: 0;
-  transform: translateY(15px);
+  /* Content must stay visible even if the stagger JS never runs. */
+  opacity: 1;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 

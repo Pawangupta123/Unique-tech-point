@@ -84,7 +84,7 @@ export default function AboutPage() {
       {/* Story */}
       <section className="mx-auto max-w-3xl px-4 py-14">
         <Reveal direction="right">
-          <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent bg-[length:100%_2px] bg-no-repeat bg-bottom hover:bg-[length:100%_100%] transition-[background-size] duration-500">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">
             Who we are
           </h2>
         </Reveal>
@@ -107,7 +107,7 @@ export default function AboutPage() {
         </Reveal>
 
         <Reveal direction="right" delay={300}>
-          <h2 className="mt-12 text-2xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent bg-[length:100%_2px] bg-no-repeat bg-bottom hover:bg-[length:100%_100%] transition-[background-size] duration-500">
+          <h2 className="mt-12 text-2xl font-bold tracking-tight text-foreground">
             What we do
           </h2>
         </Reveal>

@@ -144,12 +144,28 @@ const RAW: Omit<
   },
 ];
 
+// Verified-working Unsplash photos (placeholder product imagery until the
+// owner uploads real photos via the admin panel). Ordered to match RAW.
+const u = (id: string) => `https://images.unsplash.com/${id}?w=800&q=80`;
+const PRODUCT_IMAGES: string[][] = [
+  [u("photo-1496181133206-80ce9b88a853"), u("photo-1531297484001-80022131f5a1"), u("photo-1593642632559-0c6d3fc62b89")], // HP laptop
+  [u("photo-1593642632559-0c6d3fc62b89"), u("photo-1496181133206-80ce9b88a853"), u("photo-1531297484001-80022131f5a1")], // Dell laptop
+  [u("photo-1587202372775-e229f172b9d7"), u("photo-1591488320449-011701bb6704"), u("photo-1587202372634-32705e3bf49c")], // Gaming PC
+  [u("photo-1587202372634-32705e3bf49c"), u("photo-1587202372775-e229f172b9d7"), u("photo-1591488320449-011701bb6704")], // AiO desktop
+  [u("photo-1597872200969-2b65d56bd16b"), u("photo-1555617981-dac3880eac6e"), u("photo-1550751827-4bd374c3f58b")], // SSD
+  [u("photo-1555617981-dac3880eac6e"), u("photo-1597872200969-2b65d56bd16b"), u("photo-1550751827-4bd374c3f58b")], // RAM
+  [u("photo-1550751827-4bd374c3f58b"), u("photo-1611186871348-b1ce696e52c9"), u("photo-1525547719571-a2d4ac8945e2")], // Printer
+  [u("photo-1547082299-de196ea013d6"), u("photo-1606813907291-d86efa9b94db"), u("photo-1547082299-de196ea013d6")], // CCTV kit
+  [u("photo-1606813907291-d86efa9b94db"), u("photo-1547082299-de196ea013d6"), u("photo-1606813907291-d86efa9b94db")], // Camera
+  [u("photo-1550751827-4bd374c3f58b"), u("photo-1525547719571-a2d4ac8945e2"), u("photo-1611186871348-b1ce696e52c9")], // UPS
+];
+
 /** Fully-formed sample products with generated ids and default fields. */
 export const SAMPLE_PRODUCTS: SampleProduct[] = RAW.map((p, i) => ({
   ...p,
   id: i + 1,
   category_id: i + 1,
-  images: [],
+  images: PRODUCT_IMAGES[i],
   specs: null,
   price_label: null,
   meta_title: null,

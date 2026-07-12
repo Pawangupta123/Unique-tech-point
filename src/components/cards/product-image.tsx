@@ -3,8 +3,10 @@ import { Icon } from "@/components/icon";
 import { cn } from "@/lib/utils";
 
 /**
- * Product image with a branded fallback. When a product has no uploaded photo
- * yet, we render the category icon on a soft gradient instead of a broken box.
+ * Presentational product image with a branded fallback. The card/gallery
+ * wrappers own their own tilt/zoom motion; this stays simple and adds a subtle
+ * group-hover zoom. When a product has no photo yet, we render the category
+ * icon on a soft gradient instead of a broken box.
  */
 export function ProductImage({
   src,
@@ -13,6 +15,7 @@ export function ProductImage({
   sizes,
   priority = false,
   className,
+  style,
 }: {
   src?: string;
   alt: string;
@@ -20,9 +23,13 @@ export function ProductImage({
   sizes?: string;
   priority?: boolean;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
-    <div className={cn("relative aspect-[4/3] overflow-hidden bg-muted", className)}>
+    <div
+      className={cn("relative aspect-[4/3] overflow-hidden bg-muted", className)}
+      style={style}
+    >
       {src ? (
         <Image
           src={src}
@@ -30,7 +37,7 @@ export function ProductImage({
           fill
           sizes={sizes ?? "(max-width: 768px) 50vw, 25vw"}
           priority={priority}
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
         <div className="flex size-full items-center justify-center bg-linear-to-br from-brand-50 to-brand-100">
