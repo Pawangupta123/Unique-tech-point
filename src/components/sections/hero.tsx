@@ -54,14 +54,14 @@ export function Hero() {
         }}
       />
 
-      {/* Animated grid pattern */}
+      {/* Subtle grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage:
-            "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-          animation: "fade-in 2s ease both",
+            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          animation: "fade-in 3s ease both",
         }}
       />
 

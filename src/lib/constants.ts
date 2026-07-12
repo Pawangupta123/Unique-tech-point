@@ -136,3 +136,47 @@ export const SERVICES: ServiceSeed[] = [
     priceLabel: "Custom plans",
   },
 ];
+
+/**
+ * FAQs — natural, helpful answers that also target local + service search
+ * queries (used on the home page and emitted as FAQPage JSON-LD).
+ */
+export type Faq = { question: string; answer: string };
+
+export const FAQS: Faq[] = [
+  {
+    question: "Which is the best computer and laptop shop in Bhiwadi?",
+    answer:
+      "Unique Tech Point in Bhiwadi Industrial Area (Samtal Road, opposite Shyam Vatika) is a trusted local shop for laptops, desktops, custom PC builds, printers and accessories — with genuine products, fair pricing and on-site service.",
+  },
+  {
+    question: "Do you provide CCTV camera installation in Bhiwadi?",
+    answer:
+      "Yes. We supply and install CCTV cameras and DVR/NVR systems for homes, shops and offices across Bhiwadi, Tapukara, Chopanki and nearby areas — including wiring, mobile app setup and after-sales support.",
+  },
+  {
+    question: "Can you build a custom gaming or workstation PC?",
+    answer:
+      "Absolutely. We assemble custom PCs to your budget and needs — gaming rigs, workstations and office desktops — and help you pick the right processor, graphics card, RAM and storage.",
+  },
+  {
+    question: "Do you repair laptops, desktops and printers?",
+    answer:
+      "Yes, we repair all major brands — screen, keyboard, battery, motherboard, OS installation, virus removal and printer servicing. Diagnosis is free; we share a clear quote before any work.",
+  },
+  {
+    question: "Do you offer annual maintenance (AMC) for offices?",
+    answer:
+      "Yes. Our annual maintenance contracts keep your computers, printers and CCTV running smoothly with priority on-site support for businesses in and around Bhiwadi.",
+  },
+  {
+    question: "Which areas do you serve?",
+    answer:
+      "We serve Bhiwadi, Tapukara, Chopanki, Khushkhera, Alwar, Neemrana and nearby areas. Walk in to our shop or contact us and we can visit you for installation and service.",
+  },
+  {
+    question: "How do I get a price or place an order?",
+    answer:
+      "Just call or WhatsApp us on +91 77370 83723, or send an enquiry from any product or the contact page. We'll share the price, availability and the best option for you.",
+  },
+];

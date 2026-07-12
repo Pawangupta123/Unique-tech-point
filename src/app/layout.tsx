@@ -9,6 +9,7 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { JsonLd } from "@/components/json-ld";
 import { localBusinessLd, organizationLd, websiteLd } from "@/lib/seo";
 import { site } from "@/lib/site";
+import CursorGlowWrapper from "@/components/ui/cursor-glow-wrapper";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -56,6 +57,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <JsonLd data={[localBusinessLd(), organizationLd(), websiteLd()]} />
+        <CursorGlowWrapper />
         <ScrollProgress />
         <Navbar />
         <main className="flex-1">{children}</main>
