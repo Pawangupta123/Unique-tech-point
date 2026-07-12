@@ -5,6 +5,9 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { FloatingWhatsApp } from "@/components/contact/floating-whatsapp";
 import { Toaster } from "@/components/ui/sonner";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { JsonLd } from "@/components/json-ld";
+import { localBusinessLd, organizationLd, websiteLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -52,6 +55,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <JsonLd data={[localBusinessLd(), organizationLd(), websiteLd()]} />
+        <ScrollProgress />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

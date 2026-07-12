@@ -9,7 +9,10 @@ import { ProductGrid } from "@/components/cards/product-grid";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { CallButton, WhatsAppButton } from "@/components/contact/contact-actions";
 import { EnquiryDialog } from "@/components/contact/enquiry-dialog";
+import { JsonLd } from "@/components/json-ld";
 import { getProductBySlug, getRelatedProducts } from "@/lib/queries";
+import { productLd, breadcrumbLd } from "@/lib/seo";
+import { productHref } from "@/lib/links";
 import { formatPrice } from "@/lib/format";
 import { site } from "@/lib/site";
 
@@ -44,9 +47,23 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
   const related = await getRelatedProducts(product.category?.slug, product.slug);
   const enquiryMsg = `Hi ${site.name}, I'm interested in "${product.title}". Please share price & availability.`;
+  const href = productHref(product);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-8">
+      <JsonLd
+        data={[
+          productLd(product, href),
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Products", path: "/products" },
+            ...(product.category
+              ? [{ name: product.category.name, path: `/products/${product.category.slug}` }]
+              : []),
+            { name: product.title, path: href },
+          ]),
+        ]}
+      />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

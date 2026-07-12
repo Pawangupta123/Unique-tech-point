@@ -6,7 +6,10 @@ import { Icon } from "@/components/icon";
 import { CallButton, WhatsAppButton } from "@/components/contact/contact-actions";
 import { EnquiryDialog } from "@/components/contact/enquiry-dialog";
 import { ServiceCard } from "@/components/cards/service-card";
+import { JsonLd } from "@/components/json-ld";
 import { getServiceBySlug, getServices } from "@/lib/queries";
+import { serviceLd, breadcrumbLd } from "@/lib/seo";
+import { serviceHref } from "@/lib/links";
 import { site } from "@/lib/site";
 
 type Params = Promise<{ slug: string }>;
@@ -32,6 +35,16 @@ export default async function ServiceDetailPage({ params }: { params: Params }) 
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-8">
+      <JsonLd
+        data={[
+          serviceLd(service, serviceHref(service.slug)),
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: service.title, path: serviceHref(service.slug) },
+          ]),
+        ]}
+      />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

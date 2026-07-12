@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ProductGrid } from "@/components/cards/product-grid";
+import { JsonLd } from "@/components/json-ld";
 import { getCategoryBySlug, getProducts } from "@/lib/queries";
+import { breadcrumbLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 type Params = Promise<{ category: string }>;
@@ -36,6 +38,13 @@ export default async function CategoryPage({ params }: { params: Params }) {
     <>
       <PageHeader title={cat.name} description={cat.description ?? undefined} />
       <section className="mx-auto max-w-7xl px-4 py-8">
+        <JsonLd
+          data={breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Products", path: "/products" },
+            { name: cat.name, path: `/products/${cat.slug}` },
+          ])}
+        />
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
