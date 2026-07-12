@@ -7,6 +7,7 @@ import { FloatingWhatsApp } from "@/components/contact/floating-whatsapp";
 import { Toaster } from "@/components/ui/sonner";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { JsonLd } from "@/components/json-ld";
+import { HideOnAdmin } from "@/components/layout/site-chrome";
 import { localBusinessLd, organizationLd, websiteLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 import CursorGlowWrapper from "@/components/ui/cursor-glow-wrapper";
@@ -57,12 +58,16 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <JsonLd data={[localBusinessLd(), organizationLd(), websiteLd()]} />
-        <CursorGlowWrapper />
-        <ScrollProgress />
-        <Navbar />
+        <HideOnAdmin>
+          <CursorGlowWrapper />
+          <ScrollProgress />
+          <Navbar />
+        </HideOnAdmin>
         <main className="flex-1">{children}</main>
-        <Footer />
-        <FloatingWhatsApp />
+        <HideOnAdmin>
+          <Footer />
+          <FloatingWhatsApp />
+        </HideOnAdmin>
         <Toaster richColors position="top-center" />
       </body>
     </html>

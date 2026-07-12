@@ -6,7 +6,7 @@
  */
 import type { Product } from "@/lib/types";
 
-type SampleProduct = Product & { categorySlug: string };
+type SampleProduct = Product;
 
 const now = "2026-07-01T00:00:00.000Z";
 
@@ -18,7 +18,6 @@ const RAW: Omit<
   | "meta_title"
   | "meta_description"
   | "price_label"
-  | "category_id"
   | "created_at"
   | "updated_at"
 >[] = [
@@ -32,7 +31,7 @@ const RAW: Omit<
     brand: "HP",
     in_stock: true,
     featured: true,
-    categorySlug: "laptops",
+    category_slug: "laptops",
   },
   {
     title: "Dell Inspiron 15 Ryzen 5 Laptop",
@@ -44,7 +43,7 @@ const RAW: Omit<
     brand: "Dell",
     in_stock: true,
     featured: false,
-    categorySlug: "laptops",
+    category_slug: "laptops",
   },
   {
     title: "Unique Gaming PC — Ryzen 5 / RTX 4060",
@@ -56,7 +55,7 @@ const RAW: Omit<
     brand: "Custom Build",
     in_stock: true,
     featured: true,
-    categorySlug: "custom-pc-builds",
+    category_slug: "custom-pc-builds",
   },
   {
     title: "HP All-in-One 24 Desktop",
@@ -68,7 +67,7 @@ const RAW: Omit<
     brand: "HP",
     in_stock: true,
     featured: false,
-    categorySlug: "desktops",
+    category_slug: "desktops",
   },
   {
     title: "Samsung 970 EVO Plus 1TB NVMe SSD",
@@ -80,7 +79,7 @@ const RAW: Omit<
     brand: "Samsung",
     in_stock: true,
     featured: true,
-    categorySlug: "components",
+    category_slug: "components",
   },
   {
     title: "Corsair Vengeance 16GB DDR5 RAM",
@@ -92,7 +91,7 @@ const RAW: Omit<
     brand: "Corsair",
     in_stock: true,
     featured: false,
-    categorySlug: "components",
+    category_slug: "components",
   },
   {
     title: "HP LaserJet M1005 Multifunction Printer",
@@ -104,7 +103,7 @@ const RAW: Omit<
     brand: "HP",
     in_stock: true,
     featured: false,
-    categorySlug: "printers",
+    category_slug: "printers",
   },
   {
     title: "CP Plus 2MP HD CCTV Camera Kit (4 Cam)",
@@ -116,7 +115,7 @@ const RAW: Omit<
     brand: "CP Plus",
     in_stock: true,
     featured: true,
-    categorySlug: "cctv-cameras",
+    category_slug: "cctv-cameras",
   },
   {
     title: "Hikvision 4MP Wi-Fi Dome Camera",
@@ -128,7 +127,7 @@ const RAW: Omit<
     brand: "Hikvision",
     in_stock: true,
     featured: false,
-    categorySlug: "cctv-cameras",
+    category_slug: "cctv-cameras",
   },
   {
     title: "APC 600VA UPS Battery Backup",
@@ -140,7 +139,7 @@ const RAW: Omit<
     brand: "APC",
     in_stock: true,
     featured: false,
-    categorySlug: "accessories",
+    category_slug: "accessories",
   },
 ];
 
@@ -164,7 +163,6 @@ const PRODUCT_IMAGES: string[][] = [
 export const SAMPLE_PRODUCTS: SampleProduct[] = RAW.map((p, i) => ({
   ...p,
   id: i + 1,
-  category_id: i + 1,
   images: PRODUCT_IMAGES[i],
   specs: null,
   price_label: null,

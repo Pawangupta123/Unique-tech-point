@@ -18,7 +18,7 @@ export type Product = {
   short_description: string | null;
   price: number | null;
   price_label: string | null;
-  category_id: number | null;
+  category_slug: string | null;
   brand: string | null;
   images: string[];
   in_stock: boolean;
@@ -62,7 +62,7 @@ export type Enquiry = {
   email: string | null;
   message: string | null;
   product_id: number | null;
-  service_id: number | null;
+  subject: string | null;
   source: EnquirySource;
   status: EnquiryStatus;
   created_at: string;
