@@ -3,16 +3,21 @@ import { getCategories, getProducts, getServices } from "@/lib/queries";
 import { productHref } from "@/lib/links";
 import { site } from "@/lib/site";
 
+// Stable date-only lastmod (a per-request `new Date()` makes the sitemap look
+// like it changes on every fetch, which parsers dislike). Products use their
+// real updated_at; everything else uses this reference date.
+const LASTMOD = "2026-07-14";
+const dateOnly = (iso?: string | null) => (iso ? iso.slice(0, 10) : LASTMOD);
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = (path: string) => `${site.url}${path}`;
-  const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: url("/"), lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: url("/products"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
-    { url: url("/services"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: url("/about"), lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: url("/contact"), lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: url("/"), lastModified: LASTMOD, changeFrequency: "weekly", priority: 1 },
+    { url: url("/products"), lastModified: LASTMOD, changeFrequency: "daily", priority: 0.9 },
+    { url: url("/services"), lastModified: LASTMOD, changeFrequency: "weekly", priority: 0.8 },
+    { url: url("/about"), lastModified: LASTMOD, changeFrequency: "monthly", priority: 0.5 },
+    { url: url("/contact"), lastModified: LASTMOD, changeFrequency: "monthly", priority: 0.6 },
   ];
 
   const [categories, products, services] = await Promise.all([
@@ -23,22 +28,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const categoryPages: MetadataRoute.Sitemap = categories.map((c) => ({
     url: url(`/products/${c.slug}`),
-    lastModified: now,
-    changeFrequency: "weekly",
+    lastModified: LASTMOD,
+    changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
 
   const productPages: MetadataRoute.Sitemap = products.map((p) => ({
     url: url(productHref(p)),
-    lastModified: new Date(p.updated_at || now),
-    changeFrequency: "weekly",
+    lastModified: dateOnly(p.updated_at),
+    changeFrequency: "weekly" as const,
     priority: 0.6,
   }));
 
   const servicePages: MetadataRoute.Sitemap = services.map((s) => ({
     url: url(`/services/${s.slug}`),
-    lastModified: now,
-    changeFrequency: "monthly",
+    lastModified: LASTMOD,
+    changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
