@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { FloatingWhatsApp } from "@/components/contact/floating-whatsapp";
+import { MobileActionBar } from "@/components/contact/mobile-action-bar";
 import { Toaster } from "@/components/ui/sonner";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { JsonLd } from "@/components/json-ld";
@@ -67,6 +68,7 @@ export default function RootLayout({
         <HideOnAdmin>
           <Footer />
           <FloatingWhatsApp />
+          <MobileActionBar />
         </HideOnAdmin>
         <Toaster richColors position="top-center" />
       </body>

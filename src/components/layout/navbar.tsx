@@ -69,6 +69,11 @@ export function Navbar() {
             <MobileNav />
           </div>
         </div>
+
+        {/* Mobile search — always visible on phones (not hidden in the menu) */}
+        <div className="border-t px-4 pb-3 pt-2 md:hidden">
+          <SearchBar className="w-full" />
+        </div>
       </div>
     </header>
   );

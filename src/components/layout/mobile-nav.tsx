@@ -13,12 +13,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Logo } from "@/components/layout/logo";
-import { SearchBar } from "@/components/layout/search-bar";
 import { CallButton, WhatsAppButton } from "@/components/contact/contact-actions";
 import { Icon } from "@/components/icon";
 import { NAV_LINKS, CATEGORIES } from "@/lib/constants";
 
-/** Mobile slide-in menu with search, links, categories and contact actions. */
+/** Mobile slide-in menu: links, categories and contact actions (search lives in the header). */
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
@@ -37,11 +36,7 @@ export function MobileNav() {
           </SheetTitle>
         </SheetHeader>
 
-        <div className="p-4">
-          <SearchBar onSubmitted={close} />
-        </div>
-
-        <nav className="flex flex-col px-2 pb-2">
+        <nav className="flex flex-col px-2 pb-2 pt-3">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
