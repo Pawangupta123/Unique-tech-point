@@ -39,9 +39,9 @@ export function Hero() {
           </span>
 
           <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Computers, CCTV &amp;{" "}
+            Computer, CCTV &amp; IT shop{" "}
             <span className="bg-linear-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
-              complete IT solutions
+              in {site.address.city}
             </span>
           </h1>
 
