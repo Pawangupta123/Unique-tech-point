@@ -14,9 +14,8 @@ export const site = {
   description:
     "Unique Tech Point is Bhiwadi's trusted IT shop for laptops, desktops, custom PC builds, printers, CCTV cameras and IT services — for homes and businesses.",
 
-  // Canonical URL (used by metadata, sitemap, canonicals). Live Vercel domain;
-  // swap for a custom domain here if/when one is connected.
-  url: "https://unique-tech-point.vercel.app",
+  // Canonical URL (used by metadata, sitemap, canonicals) — live custom domain.
+  url: "https://uniquetechpoint.com",
 
   // Contact — real details from the shop's tax invoice.
   phone: "+917737083723",
