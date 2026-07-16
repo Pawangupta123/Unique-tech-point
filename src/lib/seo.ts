@@ -79,16 +79,22 @@ export function websiteLd(): Record<string, unknown> {
 }
 
 export function productLd(product: ProductWithCategory, path: string): Record<string, unknown> {
-  const offer: Record<string, unknown> = {
-    "@type": "Offer",
-    url: abs(path),
-    priceCurrency: site.currency,
-    availability: product.in_stock
-      ? "https://schema.org/InStock"
-      : "https://schema.org/OutOfStock",
-    seller: { "@id": ORG_ID },
-  };
-  if (product.price != null) offer.price = product.price;
+  // Google requires an Offer to carry a price. For "Ask for price" products
+  // (price == null) we omit `offers` entirely — a Product without offers is
+  // still valid structured data, whereas an Offer without a price is not.
+  const offers =
+    product.price != null
+      ? {
+          "@type": "Offer",
+          url: abs(path),
+          price: product.price,
+          priceCurrency: site.currency,
+          availability: product.in_stock
+            ? "https://schema.org/InStock"
+            : "https://schema.org/OutOfStock",
+          seller: { "@id": ORG_ID },
+        }
+      : undefined;
 
   return {
     "@context": "https://schema.org",
@@ -98,7 +104,7 @@ export function productLd(product: ProductWithCategory, path: string): Record<st
     image: product.images.length ? product.images.map(abs) : abs("/logo.png"),
     brand: product.brand ? { "@type": "Brand", name: product.brand } : undefined,
     category: product.category?.name,
-    offers: offer,
+    ...(offers ? { offers } : {}),
   };
 }
 
